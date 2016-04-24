@@ -29,19 +29,22 @@ class Post(models.Model):
 	                         choices=STATUS_CHOICES,
 	                         default='draft')
 
-	def get_absolut_url(self):
-		return reverse('blog:post_detail',args=[self.publish.year,
-												self.publish.strftime('%m'),
-												self.publish.strftime('%d'),
-												self.slug])
-
-
-
 	objects= models.Manager()
 	published = PublishedManager()
-       
-class Meta:
-	ordering = ('-publish',)
 
-def __str__(self):
-	return self.title
+	def get_absolute_url(self):
+		return reverse('blog:post_detail',
+						args=[self.publish.year,
+						self.publish.strftime('%m'),
+						self.publish.strftime('%d'),
+						self.slug])
+
+
+
+	
+       
+	class Meta:
+		ordering = ('-publish',)
+
+	def __str__(self):
+		return self.title
